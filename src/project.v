@@ -54,8 +54,7 @@ module tt_um_rejunity_vga_playground(
   wire [10:0] ccc = counter[4:0];
   genvar i;
   generate
-  // always @(*) begin
-    for (i = 0; i < 64; i = i + 2) begin
+    for (i = 0; i < 64; i = i + 1) begin
       wire [7:0] d = (255 - i);
       //wire [3:0] d = 12 - i[6:3];                  
       // assign out[i] = ~|((x[8:0] - (y>>1) + counter*i) & y);
