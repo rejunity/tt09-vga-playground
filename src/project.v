@@ -52,7 +52,6 @@ module tt_um_rejunity_vga_playground(
   wire out[255:0];
   wire [5:0] out_;
   wire [10:0] ccc = counter[4:0];
-  // wire [1:0] out_ = out[0] + out[1] + out[2] + out[3] + out[4] + out[5] + out[6];
   genvar i;
   generate
   // always @(*) begin
@@ -61,7 +60,7 @@ module tt_um_rejunity_vga_playground(
       //wire [3:0] d = 12 - i[6:3];                  
       // assign out[i] = ~|((x[8:0] - (y>>1) + counter*i) & y);
       wire  [7:0] z_ = i;
-      wire  [14:0] x_ = (((x)-320)*d)>>6;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
+      wire  [14:0] x_ = (((x+ccc)-320)*d)>>6;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
       wire  [14:0] y_ = (((y)-000)*d)>>6;//y + ((counter*(i)) >> d);
       // wire signed [8:0] x_ = (((x)-256)*d)>>7;//((x+((ccc*i)>>3) )*d)>>7;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
       // wire [8:0] y_ = ((y-256)*d)>>7;//((y+((ccc*i)>>3) )*d)>>7;//y + ((counter*(i)) >> d);
@@ -71,20 +70,75 @@ module tt_um_rejunity_vga_playground(
                       // | (y_[6] & (x_[6] ^ z_[5]) & (y_[6] ^ z_[3]) & (x_[7] ^ y_[7]));
       // assign out[i] = (x_[6] ^ z_[5]) & (y_[6] ^ z_[4]) & (x_[7] ^ y_[7]); //(z_[3] & (x_[5] ^ y_[5])) & (x_[7] ^ y_[7]);
       // assign out[i] = ~|(x_ & (i[7:0]&y[8:0]));// & y);
-      // if (i == 0)
-      //   assign out_ = out[0];
-      // else
-      //   assign out_ = out_ + out[i];
-      // assign out_ = (i == 0 ? 0 : out_) + out[i];
-      // assign out_ = out[i] && (out_ == 0) ? i : 0;// (i == 0 ? 0 : out_) + out[i];
-      if (i == 0)
-        assign out_ = out[i];
-      else
-        assign out_ = out[i] ? i: out_;
     end
-  // end
-  endgenerate
-    
+    endgenerate
+
+    // for i in reversed(range(64)): print(f"out[{i}] ? {i} :" if i > 0 else "0;")
+    assign out_ = 
+                  out[63] ? 63 :
+                  out[62] ? 62 :
+                  out[61] ? 61 :
+                  out[60] ? 60 :
+                  out[59] ? 59 :
+                  out[58] ? 58 :
+                  out[57] ? 57 :
+                  out[56] ? 56 :
+                  out[55] ? 55 :
+                  out[54] ? 54 :
+                  out[53] ? 53 :
+                  out[52] ? 52 :
+                  out[51] ? 51 :
+                  out[50] ? 50 :
+                  out[49] ? 49 :
+                  out[48] ? 48 :
+                  out[47] ? 47 :
+                  out[46] ? 46 :
+                  out[45] ? 45 :
+                  out[44] ? 44 :
+                  out[43] ? 43 :
+                  out[42] ? 42 :
+                  out[41] ? 41 :
+                  out[40] ? 40 :
+                  out[39] ? 39 :
+                  out[38] ? 38 :
+                  out[37] ? 37 :
+                  out[36] ? 36 :
+                  out[35] ? 35 :
+                  out[34] ? 34 :
+                  out[33] ? 33 :
+                  out[32] ? 32 :
+                  out[31] ? 31 :
+                  out[30] ? 30 :
+                  out[29] ? 29 :
+                  out[28] ? 28 :
+                  out[27] ? 27 :
+                  out[26] ? 26 :
+                  out[25] ? 25 :
+                  out[24] ? 24 :
+                  out[23] ? 23 :
+                  out[22] ? 22 :
+                  out[21] ? 21 :
+                  out[20] ? 20 :
+                  out[19] ? 19 :
+                  out[18] ? 18 :
+                  out[17] ? 17 :
+                  out[16] ? 16 :
+                  out[15] ? 15 :
+                  out[14] ? 14 :
+                  out[13] ? 13 :
+                  out[12] ? 12 :
+                  out[11] ? 11 :
+                  out[10] ? 10 :
+                  out[9] ? 9 :
+                  out[8] ? 8 :
+                  out[7] ? 7 :
+                  out[6] ? 6 :
+                  out[5] ? 5 :
+                  out[4] ? 4 :
+                  out[3] ? 3 :
+                  out[2] ? 2 :
+                  out[1] ? 1 :
+                  0;
   // wire out[255:0];
   // wire [5:0] out_;
   // wire [10:0] ccc = counter[4:0];
