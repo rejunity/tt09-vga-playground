@@ -48,24 +48,24 @@ module tt_um_rejunity_vga_playground(
     .vpos(y)
   );
 
-  
+
   wire out[255:0];
   wire [5:0] out_;
   wire [10:0] ccc = counter[4:0];
   // wire [1:0] out_ = out[0] + out[1] + out[2] + out[3] + out[4] + out[5] + out[6];
-	genvar i;
+  genvar i;
   generate
   // always @(*) begin
     for (i = 0; i < 64; i = i + 2) begin
-      integer d = (256 - i);
+      wire [7:0] d = (255 - i);
       //wire [3:0] d = 12 - i[6:3];                  
       // assign out[i] = ~|((x[8:0] - (y>>1) + counter*i) & y);
-      wire  [9:0] x_ = ((x+ ((ccc*(i+32))>>3) )*d)>>7;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
-      wire  [9:0] y_ = ((y+ ((ccc*i)>>3) )*d)>>7;//y + ((counter*(i)) >> d);
+      wire  [7:0] z_ = i;
+      wire  [14:0] x_ = (((x)-320)*d)>>6;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
+      wire  [14:0] y_ = (((y)-000)*d)>>6;//y + ((counter*(i)) >> d);
       // wire signed [8:0] x_ = (((x)-256)*d)>>7;//((x+((ccc*i)>>3) )*d)>>7;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
       // wire [8:0] y_ = ((y-256)*d)>>7;//((y+((ccc*i)>>3) )*d)>>7;//y + ((counter*(i)) >> d);
     
-      wire [8:0] z_ = i;
 
       assign out[i] = (~|(y_[8:0] & (i*8))) & (x_[7:5] == 0);
                       // | (y_[6] & (x_[6] ^ z_[5]) & (y_[6] ^ z_[3]) & (x_[7] ^ y_[7]));
@@ -84,6 +84,25 @@ module tt_um_rejunity_vga_playground(
     end
   // end
   endgenerate
+    
+  // wire out[255:0];
+  // wire [5:0] out_;
+  // wire [10:0] ccc = counter[4:0];
+	// genvar i;
+  // generate
+  //   for (i = 0; i < 64; i = i + 2) begin
+  //     integer d = (256 - i);
+  //     wire  [9:0] x_ = ((x+ ((ccc*(i+32))>>3) )*d)>>7;// x + ((counter*(i)) >> d);//(x[8:0] - (y>>1) + ((counter*(i)) >> 5));
+  //     wire  [9:0] y_ = ((y+ ((ccc*i)>>3) )*d)>>7;//y + ((counter*(i)) >> d);
+  //     wire [8:0] z_ = i;
+
+  //     assign out[i] = (~|(y_[8:0] & (i*8))) & (x_[7:5] == 0);
+  //     if (i == 0)
+  //       assign out_ = out[i];
+  //     else
+  //       assign out_ = out[i] ? i: out_;
+  //   end
+  // endgenerate
 
   // out[i] = i[1:0];//x[8:0] - (y>>1) + counter*i;
 
